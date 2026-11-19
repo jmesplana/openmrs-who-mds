@@ -15,3 +15,9 @@ frontend/playwright-report/
 # OS / editor
 .DS_Store
 *.swp
+
+# Spec PDF kept only at specs/daily-report.pdf; ignore stray copies at the root
+/MDS-Ver1.0_*.pdf
+
+# Metadata captured from a live instance stays local
+config/local-metadata-inventory.json
