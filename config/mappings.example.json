@@ -1,0 +1,21 @@
+{
+  "o": {
+    "reviewed": false,
+    "source": "encounter",
+    "encounterTypes": ["REPLACE-WITH-NEW-CONSULTATION-ENCOUNTER-TYPE-UUID"]
+  },
+  "9": {
+    "reviewed": false,
+    "source": "codedObservation",
+    "question": "REPLACE-WITH-MDS-HEALTH-EVENT-QUESTION-UUID",
+    "answers": ["REPLACE-WITH-ACUTE-RESPIRATORY-INFECTION-ANSWER-UUID"],
+    "countUnit": "encounter"
+  },
+  "30": {
+    "reviewed": false,
+    "source": "codedObservation",
+    "question": "REPLACE-WITH-PROCEDURE-QUESTION-UUID",
+    "answers": ["REPLACE-WITH-MAJOR-PROCEDURE-ANSWER-UUID"],
+    "countUnit": "observation"
+  }
+}

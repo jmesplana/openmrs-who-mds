@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.openmrs.org/routes.schema.json",
+  "backendDependencies": {"whomds": ">=0.1.0"},
+  "pages": [{"component": "root", "route": "who-mds", "online": true, "offline": false, "privileges": ["Run WHO MDS Reports"]}],
+  "extensions": [{"name": "who-mds-app-menu-link", "slot": "app-menu-slot", "component": "appMenuLink", "online": true, "offline": false, "privileges": ["Run WHO MDS Reports"]}]
+}

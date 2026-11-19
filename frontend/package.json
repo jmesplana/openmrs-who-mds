@@ -1,0 +1,37 @@
+{
+  "name": "@who-mds/esm-who-mds-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WHO EMT MDS reporting for OpenMRS 3",
+  "browser": "dist/who-mds-esm-who-mds-app.js",
+  "main": "src/index.ts",
+  "source": true,
+  "files": [
+    "dist",
+    "src/routes.json"
+  ],
+  "scripts": {
+    "start": "openmrs develop",
+    "build": "node build.cjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs",
+    "test:e2e": "playwright test"
+  },
+  "peerDependencies": {
+    "@openmrs/esm-framework": ">=8 <12",
+    "react": "18.x",
+    "react-dom": "18.x"
+  },
+  "devDependencies": {
+    "@openmrs/esm-framework": "11.0.0",
+    "@openmrs/rspack-config": "11.0.0",
+    "@playwright/test": "1.58.2",
+    "@rspack/core": "1.7.9",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "openmrs": "11.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,17 @@
+# Build output
+frontend/dist/
+backend/target/
+
+# Dependencies
+node_modules/
+
+# Local install state (container backups, registry snapshots)
+.local-install/
+
+# Playwright
+frontend/test-results/
+frontend/playwright-report/
+
+# OS / editor
+.DS_Store
+*.swp

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module configVersion="1.2">
+  <id>whomds</id><name>WHO EMT MDS Reporting</name><version>0.1.0</version>
+  <package>org.openmrs.module.whomds</package><author>WHO MDS project</author>
+  <description>Location-scoped, timezone-aware EMT MDS draft reporting.</description>
+  <activator>org.openmrs.module.whomds.WhoMdsActivator</activator>
+  <require_version>2.7.0</require_version>
+  <privilege><name>Run WHO MDS Reports</name><description>Generate aggregate EMT MDS reports.</description></privilege>
+  <privilege><name>WHO MDS All Locations</name><description>Report on every location. Otherwise grant WHO MDS Location: UUID.</description></privilege>
+  <globalProperty><property>whomds.mappings</property><defaultValue>{}</defaultValue><description>Reviewed JSON indicator mappings. See project config documentation.</description></globalProperty>
+  <servlet><servlet-name>report</servlet-name><servlet-class>org.openmrs.module.whomds.ReportServlet</servlet-class></servlet>
+</module>

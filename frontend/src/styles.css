@@ -1,0 +1,148 @@
+.who-mds { max-width: 1440px; margin: 0 auto; padding: 2rem; background: #f4f4f4; color: #161616; font-family: 'IBM Plex Sans', Arial, sans-serif; }
+.who-mds * { box-sizing: border-box; }
+.who-mds h1 { font-size: 2rem; margin: .25rem 0 .75rem; }
+.who-mds h2 { font-size: 1.35rem; margin: 1rem 0; }
+.who-mds h3 { font-size: 1.1rem; margin: 1.5rem 0 .75rem; }
+.who-mds p { line-height: 1.5; }
+.who-mds .eyebrow { color: #525252; font-size: .85rem; }
+.who-mds .filters, .who-mds .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.who-mds .filters, .who-mds .team, .who-mds .empty, .who-mds .bucket { background: white; padding: 1.5rem; margin-top: 1.5rem; }
+.who-mds label { display: flex; flex-direction: column; gap: .5rem; font-size: .875rem; }
+.who-mds input, .who-mds select, .who-mds textarea { width: 100%; min-height: 2.75rem; padding: .65rem; font: inherit; background: #f4f4f4; border: 1px solid #8d8d8d; border-radius: 0; color: #161616; }
+.who-mds button { padding: .8rem 1rem; border: 0; background: #005d5d; color: white; font: inherit; cursor: pointer; align-self: end; min-height: 2.75rem; }
+.who-mds button:disabled { background: #c6c6c6; color: #525252; cursor: default; }
+.who-mds :focus-visible { outline: 3px solid #0f62fe; outline-offset: 2px; }
+.who-mds .help { grid-column: 1 / -1; color: #525252; font-size: .85rem; margin-bottom: 0; }
+.who-mds .report-heading { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+.who-mds .actions { display: flex; align-items: flex-start; gap: .5rem; }
+.who-mds .draft { display: inline-block; background: #f1c21b; color: #161616; padding: .3rem .6rem; font-size: .75rem; font-weight: 600; }
+.who-mds .notice, .who-mds .error { padding: 1rem; margin-top: 1rem; border-left: 4px solid #f1c21b; background: #fff8e1; line-height: 1.6; }
+.who-mds .error { border-color: #da1e28; background: #fff1f1; }
+.who-mds summary { cursor: pointer; margin-bottom: 1rem; font-weight: 600; }
+.who-mds .table-wrap { overflow-x: auto; }
+.who-mds table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+.who-mds td, .who-mds th { text-align: left; padding: .75rem; border-bottom: 1px solid #e0e0e0; }
+.who-mds thead { background: #e0e0e0; }
+.who-mds tbody th { font-weight: 400; min-width: 200px; }
+.who-mds td input { min-width: 90px; }
+.who-mds .notes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.who-mds .offset-toggle { flex-direction: row; align-items: center; grid-column: 1 / -1; }
+.who-mds .offset-toggle input { width: 1rem; min-height: 1rem; }
+.who-mds .print-note { display: none; }
+@media print { .who-mds .print-note { display: block; white-space: pre-wrap; overflow-wrap: anywhere; } }
+@media(max-width: 800px) { .who-mds { padding: 1rem; } .who-mds .filters, .who-mds .team-grid, .who-mds .notes-grid { grid-template-columns: 1fr; } .who-mds .report-heading { flex-direction: column; } }
+@media print { .who-mds { padding: 0; max-width: none; background: white; } .who-mds .no-print { display: none !important; } .who-mds .bucket { break-before: page; padding: 0; } .who-mds .table-wrap { overflow: visible; } .who-mds tr { break-inside: avoid; } .who-mds textarea { height: auto; min-height: 5rem; } .who-mds input { border: none; background: white; } }
+
+/* ---------------------------------------------------------------------------
+   Printable WHO EMT-MDS Daily Reporting Form (Ver 2019)
+   Hidden on screen; on paper it replaces the flowing report with a replica of
+   the official one-page form, one page per reporting interval.
+   --------------------------------------------------------------------------- */
+.mds-forms { display: none; }
+
+@media print {
+  @page { size: A4 portrait; margin: 8mm; }
+
+  /* The screen report is a review surface; the form is what gets submitted. */
+  .who-mds > header, .who-mds > form, .who-mds .empty, .who-mds .notice,
+  .who-mds .team, .who-mds .bucket, .who-mds .report-heading, .who-mds .help,
+  .who-mds > p[role="status"], .who-mds .error { display: none !important; }
+
+  .mds-forms { display: block; }
+  .mds-form {
+    break-after: page; font-family: 'IBM Plex Sans', Arial, sans-serif;
+    color: #000; font-size: 5.9pt; line-height: 1.05;
+  }
+  .mds-form:last-child { break-after: auto; }
+  .mds-band, .mds-spine-row, table.mds-grid, .mds-comment { break-inside: avoid; }
+  .mds-grid tr { break-inside: avoid; }
+
+  .mds-head { display: grid; grid-template-columns: 120px 1fr 90px; align-items: center; margin-bottom: 3pt; }
+  .mds-logo { border: 1px solid #2f5496; color: #2f5496; font-size: 6pt; text-align: center; padding: 6pt 3pt; }
+  .mds-head h1 { font-size: 17pt; font-weight: 700; color: #2f5496; text-align: center; margin: 0; letter-spacing: -.2pt; }
+  .mds-who { text-align: right; }
+  .mds-who-mark { display: inline-block; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #2f5496; }
+  .mds-ver { display: block; font-size: 4.6pt; color: #333; }
+
+  /* Coloured spines running down the left of each band, as on the official form. */
+  .mds-spine {
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 6.6pt; padding: 2pt 0; letter-spacing: .2pt;
+  }
+  .mds-spine-blue { background: #1e87c8; }
+  .mds-spine-green { background: #0f7a3d; }
+
+  .mds-band { display: grid; gap: 0; margin-bottom: 2pt; }
+  .mds-band-team { grid-template-columns: 11pt 1fr 1fr; }
+  .mds-band-summary { grid-template-columns: 11pt minmax(0,1.06fr) 11pt minmax(0,1.1fr) minmax(0,1.04fr); }
+  .mds-band-lower {
+    display: grid; grid-template-columns: minmax(0,1.46fr) minmax(0,1fr);
+    gap: 3pt; align-items: start; break-inside: avoid;
+  }
+  .mds-col-left { display: flex; flex-direction: column; gap: 3pt; min-width: 0; }
+  .mds-col-right { min-width: 0; break-inside: avoid; }
+  .mds-spine-row { display: grid; grid-template-columns: 11pt 11pt 1fr; }
+  .mds-clinical-wrap { flex: 0 0 auto; }
+
+  table.mds-team, table.mds-when, table.mds-grid, table.mds-types {
+    width: 100%; border-collapse: collapse; table-layout: fixed;
+  }
+  .mds-team td, .mds-when td, .mds-grid td, .mds-grid th, .mds-types td, .mds-types th {
+    border: .5pt solid #000; padding: 1pt 2pt; vertical-align: middle;
+  }
+  .mds-grid th[scope="row"] {
+    text-align: left; font-weight: 700; hyphens: auto; overflow-wrap: break-word;
+  }
+  .mds-summary th[scope="row"], .mds-outcome th[scope="row"], .mds-context th[scope="row"],
+  .mds-needs th[scope="row"], .mds-clinical th[scope="row"], .mds-demo th[scope="row"] {
+    font-size: 5.4pt; line-height: 1.02;
+  }
+
+  .mds-letter { width: 9pt; text-align: center; font-size: 5pt; color: #333; }
+  .mds-field { position: relative; }
+  .mds-field-name { font-weight: 700; }
+  .mds-hint { font-weight: 400; font-size: 5pt; }
+  /* Typed values print inline after the caption; empty fields stay blank for completion by hand. */
+  .mds-field-value { font-weight: 400; margin-left: 4pt; }
+  .mds-team tr, .mds-when tr { height: 11.5pt; }
+  .mds-types th { background: #cfe0f3; font-size: 5.4pt; text-align: center; font-weight: 700; }
+  .mds-types td { height: 11pt; text-align: center; }
+  .mds-field-types { padding: 0; }
+  .mds-location-head { background: #7fb2e0; color: #fff; font-weight: 700; text-align: center; }
+  .mds-geo-pair { display: block; margin-top: 1pt; }
+  .mds-geo-value { display: inline-block; min-width: 54pt; border-bottom: .5pt solid #000; }
+  .mds-geo-label { font-size: 4.6pt; margin: 0 4pt 0 1pt; }
+
+  .mds-note { font-size: 5pt; font-weight: 700; margin: 1pt 0 2pt; }
+  .mds-foot { font-size: 4.8pt; font-weight: 700; margin-top: 2pt; }
+
+  .mds-subhead { font-weight: 700; background: #fff; }
+  .mds-vspine {
+    writing-mode: vertical-rl; transform: rotate(180deg); width: 8pt;
+    text-align: center; font-size: 5pt; font-weight: 700; background: #eef3f8;
+  }
+  .mds-vspine-head { width: 9pt; background: #eef3f8; }
+  .mds-no { width: 9pt; text-align: center; font-size: 4.9pt; }
+  .mds-value { width: 21pt; text-align: center; height: 8.4pt; }
+  .mds-check { width: 14pt; text-align: center; font-size: 7pt; color: #1e87c8; }
+  .mds-blocked { background: #8c8c8c; }
+  .mds-blank { height: 10.5pt; }
+  .mds-letter-inline { font-size: 5pt; color: #333; }
+  .mds-grey { background: #a6a6a6; color: #fff; text-align: center; font-weight: 700; }
+  .mds-total { background: #fde9e9; color: #c00000; text-align: center; font-weight: 700; }
+  .mds-centre { text-align: center; }
+  .mds-spine-stats { grid-row: span 1; }
+  .mds-group-start td, .mds-group-start th { border-top: 1pt solid #000; }
+  .mds-subhead-row td { border-top: 1pt solid #000; }
+
+  .mds-demo thead th, .mds-clinical thead th { text-align: center; font-size: 5.6pt; }
+  .mds-demo thead th:nth-child(3), .mds-clinical thead th:nth-child(3) { text-align: center; }
+
+  .mds-needs-head { background: #1e87c8; color: #fff; font-weight: 700; text-align: center; padding: 1.5pt; font-size: 7pt; }
+  .mds-needs-sub { background: #e9eef4; font-weight: 700; text-align: center; padding: 1.5pt; border: .5pt solid #000; border-top: 0; }
+  .mds-comment-head { background: #e9eef4; font-weight: 700; padding: 1.5pt 3pt; border: .5pt solid #000; border-top: 0; }
+  .mds-comment-body { border: .5pt solid #000; border-top: 0; min-height: 21pt; padding: 2pt 3pt; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  .mds-draft-mark { margin-top: 2pt; font-size: 5.4pt; font-weight: 700; color: #c00000; text-align: right; }
+}

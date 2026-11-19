@@ -1,0 +1,150 @@
+{
+  "inspectedAt": "2026-11-19",
+  "platformVersion": "2.8.10",
+  "coreVersion": "11.0.0",
+  "forms": [
+    {
+      "uuid": "9e1a0c68-ca19-3482-9ffb-0a6b4e591c2a",
+      "name": "Covid 19",
+      "encounterType": "Consultation"
+    },
+    {
+      "uuid": "49668596-d36d-3ccd-8429-2c188ead3da1",
+      "name": "Form Engine Cookbook",
+      "encounterType": "Consultation"
+    },
+    {
+      "uuid": "0c16a618-40d8-33d7-9db5-564b5a36d3a1",
+      "name": "Form Engine Cookbook Library",
+      "encounterType": "Consultation"
+    },
+    {
+      "uuid": "c55069ca-3ce3-3ec5-b3d0-e1c59e917211",
+      "name": "Laboratory Test Results",
+      "encounterType": "Lab Results"
+    },
+    {
+      "uuid": "2069bd57-d534-3de9-ae24-f1d4e4b2de83",
+      "name": "Mental Health Assessment Form",
+      "encounterType": "Mental Health Assessment"
+    },
+    {
+      "uuid": "5ef74335-b5c5-375d-8823-5b90b71bad0b",
+      "name": "Structured SOAP note",
+      "encounterType": "Consultation"
+    },
+    {
+      "uuid": "96637f12-3c04-311f-b477-3fa6a866e895",
+      "name": "Surgical Operation",
+      "encounterType": "Consultation"
+    },
+    {
+      "uuid": "2ddde996-b1c3-37f1-a53e-378dd1a4f6b5",
+      "name": "Test Form 1",
+      "encounterType": "Consultation"
+    },
+    {
+      "uuid": "c4efe3f7-a556-3377-bc69-cae193418ebd",
+      "name": "Ward Admission",
+      "encounterType": "Transfer Request"
+    }
+  ],
+  "encounterTypes": [
+    {
+      "uuid": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378",
+      "name": "Admission",
+      "description": "Indicates that the patient has been admitted for inpatient care, and is not expected to leave the hospital unless discharged."
+    },
+    {
+      "uuid": "0e8230ce-bd1d-43f5-a863-cf44344fa4b0",
+      "name": "Adult Visit",
+      "description": "Encounter for adult visit form"
+    },
+    {
+      "uuid": "5021b1a1-e7f6-44b4-ba02-da2f2bcf8718",
+      "name": "Attachment Upload",
+      "description": "Encounters used to record uploads of attachments."
+    },
+    {
+      "uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "name": "Bed Assignment",
+      "description": "Assigning a new bed to a patient without admitting or transferring them"
+    },
+    {
+      "uuid": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Cancel ADT",
+      "description": "An encounter that notes that a request to admit/transfer/discharge a patient is being overridden"
+    },
+    {
+      "uuid": "ca3aed11-1aa4-42a1-b85c-8332fc8001fc",
+      "name": "Check In",
+      "description": "Indicates the patient has done the required paperwork and check-in to begin a visit to the clinic/hospital."
+    },
+    {
+      "uuid": "25a042b2-60bc-4940-a909-debd098b7d82",
+      "name": "Check Out",
+      "description": "The patient is explicitly leaving the hospital/clinic. (Usually no formal encounter is captured for this.)"
+    },
+    {
+      "uuid": "dd528487-82a5-4082-9c72-ed246bd49591",
+      "name": "Consultation",
+      "description": "Consultation encounter"
+    },
+    {
+      "uuid": "181820aa-88c9-479b-9077-af92f5364329",
+      "name": "Discharge",
+      "description": "Indicates that a patient's inpatient care at the hospital is ending, and they are expected to leave soon."
+    },
+    {
+      "uuid": "29c02aff-9a93-46c9-bf6f-48b552fcb1fa",
+      "name": "Immunizations",
+      "description": "Encounter for capturing immunizations"
+    },
+    {
+      "uuid": "a1f5c3d2-4b6e-4e8a-9f2d-1b3e8e4a2d7f",
+      "name": "Inpatient Note",
+      "description": "A short free-text note written by a clinician about an inpatient during their stay"
+    },
+    {
+      "uuid": "7b68d557-85ef-4fc8-b767-4fa4f5eb5c23",
+      "name": "Intra-Hospital Transfer",
+      "description": "Indicates that a patient is being transferred into a different department within the hospital. (Transfers out of the hospital should not use this encounter type.)"
+    },
+    {
+      "uuid": "3596fafb-6f6f-4396-8c87-6e63a0f1bd71",
+      "name": "Lab Results",
+      "description": "Encounter for capturing lab results"
+    },
+    {
+      "uuid": "36db5123-0ad5-41c0-9037-625b46e0ceef",
+      "name": "Mental Health Assessment",
+      "description": "Mental Health Assessment"
+    },
+    {
+      "uuid": "39da3525-afe4-45ff-8977-c53b7b359158",
+      "name": "Order",
+      "description": "Encounter for capturing orders"
+    },
+    {
+      "uuid": "d3b07384-8d1c-4e6b-9b8e-2f3b8e4a1c9f",
+      "name": "Transfer",
+      "description": "Indicates that a patient is being transferred into a different department within the hospital. (Transfers out of the hospital should not use this encounter type.)"
+    },
+    {
+      "uuid": "b2c4d5e6-7f8a-4e9b-8c1d-2e3f8e4a3b8f",
+      "name": "Transfer Request",
+      "description": "A stand-alone encounter type for a transfer request not part of a larger note"
+    },
+    {
+      "uuid": "d7151f82-c1f3-4152-a605-2f9ea7414a79",
+      "name": "Visit Note",
+      "description": "Encounter where a full or abbreviated examination is done, usually leading to a presumptive or confirmed diagnosis, recorded by the examining clinician."
+    },
+    {
+      "uuid": "67a71486-1a54-468f-ac3e-7091a9a79584",
+      "name": "Vitals",
+      "description": "For capturing vital signs"
+    }
+  ],
+  "mappingStatus": "No clinical mappings enabled; new-consultation and EMT case definitions require source-form validation."
+}

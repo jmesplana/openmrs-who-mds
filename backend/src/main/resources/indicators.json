@@ -1,0 +1,492 @@
+[
+  {
+    "id": "o",
+    "label": "New consultations",
+    "section": "Daily summary",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "40",
+    "label": "New admissions",
+    "section": "Daily summary",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "q",
+    "label": "Live births",
+    "section": "Daily summary",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "r",
+    "label": "Total bed capacity",
+    "section": "Bed snapshot",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "s",
+    "label": "Empty inpatient beds (non-ICU)",
+    "section": "Bed snapshot",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "t",
+    "label": "Empty ICU beds",
+    "section": "Bed snapshot",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "1",
+    "label": "Male",
+    "section": "Sex and age",
+    "bands": "demographic",
+    "manual": false
+  },
+  {
+    "id": "2",
+    "label": "Female, non-pregnant",
+    "section": "Sex and age",
+    "bands": "demographic",
+    "manual": false
+  },
+  {
+    "id": "3",
+    "label": "Female, pregnant",
+    "section": "Sex and age",
+    "bands": "demographic",
+    "manual": false
+  },
+  {
+    "id": "4",
+    "label": "Major head / spine injury",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "5",
+    "label": "Major torso injury",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "6",
+    "label": "Major extremity injury",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "7",
+    "label": "Moderate injury",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "8",
+    "label": "Minor injury",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "9",
+    "label": "Acute respiratory infection",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "10",
+    "label": "Acute watery diarrhea",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "11",
+    "label": "Acute bloody diarrhea",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "12",
+    "label": "Acute jaundice syndrome",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "13",
+    "label": "Suspected measles",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "14",
+    "label": "Suspected meningitis",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "15",
+    "label": "Suspected tetanus",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "16",
+    "label": "Acute flaccid paralysis",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "17",
+    "label": "Acute haemorrhagic fever",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "18",
+    "label": "Fever of unknown origin",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "19",
+    "label": "Additional context-specific condition 1",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "20",
+    "label": "Additional context-specific condition 2",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "21",
+    "label": "Additional context-specific condition 3",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "22",
+    "label": "Additional context-specific condition 4",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "23",
+    "label": "Surgical emergency (non-trauma)",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "24",
+    "label": "Medical emergency (non-infectious)",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "25",
+    "label": "Skin disease",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "26",
+    "label": "Acute mental health problem",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "27",
+    "label": "Obstetric complications",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "28",
+    "label": "Severe acute malnutrition",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "29",
+    "label": "Other diagnosis",
+    "section": "Health events",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "30",
+    "label": "Major procedure (excluding limb amputation)",
+    "section": "Procedures",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "31",
+    "label": "Limb amputation excluding digits",
+    "section": "Procedures",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "32",
+    "label": "Minor surgical procedure",
+    "section": "Procedures",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "33",
+    "label": "Normal vaginal delivery",
+    "section": "Procedures",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "34",
+    "label": "Caesarean section",
+    "section": "Procedures",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "35",
+    "label": "Other obstetric procedures",
+    "section": "Procedures",
+    "bands": "clinical",
+    "manual": false
+  },
+  {
+    "id": "36",
+    "label": "Discharge without medical follow-up",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "37",
+    "label": "Discharge with medical follow-up",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "38",
+    "label": "Discharge against medical advice",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "39",
+    "label": "Referral",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "41",
+    "label": "Dead on arrival",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "42",
+    "label": "Death within facility",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "43",
+    "label": "Requiring long-term rehabilitation",
+    "section": "Outcomes",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "44",
+    "label": "Directly related to event",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "45",
+    "label": "Indirectly related to event",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "46",
+    "label": "Not related to event",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "47",
+    "label": "Vulnerable child",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "48",
+    "label": "Vulnerable adult",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "49",
+    "label": "Sexual and gender-based violence",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "50",
+    "label": "Violence (non-SGBV)",
+    "section": "Context and protection",
+    "bands": "total",
+    "manual": false
+  },
+  {
+    "id": "51",
+    "label": "Unexpected death",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "52",
+    "label": "Notifiable disease",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "53",
+    "label": "Protection issues",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "54",
+    "label": "Critical incident to EMT / community",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "55",
+    "label": "Other immediate reporting issue",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "56",
+    "label": "WASH",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "57",
+    "label": "Community / suspected infectious disease",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "58",
+    "label": "Environmental risk / exposure",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "59",
+    "label": "Shelter / non-food items",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "60",
+    "label": "Food insecurity",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "61",
+    "label": "Logistics / operational support",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "62",
+    "label": "Supply",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "63",
+    "label": "Human resources",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "64",
+    "label": "Finance",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  },
+  {
+    "id": "65",
+    "label": "Other needs / risks",
+    "section": "Needs and risks",
+    "bands": "total",
+    "manual": true
+  }
+]
