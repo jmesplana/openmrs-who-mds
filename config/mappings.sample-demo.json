@@ -1,0 +1,142 @@
+{
+  "_comment": [
+    "SAMPLE mapping for the OpenMRS 3 reference-application demo database ONLY.",
+    "It demonstrates automated capture end to end; it is NOT a validated EMT MDS case-definition set.",
+    "The demo database holds randomly generated CIEL diagnoses, so groupings here are illustrative.",
+    "Before any real deployment, replace these with definitions agreed with the clinical team and",
+    "re-set 'reviewed' deliberately. Rows left out stay 'Not configured' rather than counting zero.",
+    "Verified against: Platform 2.8.10, Core 11.0.0, inspected 2026-11-20."
+  ],
+
+  "o": {
+    "_note": "MDS o - new consultations. Demo proxy: Visit Note encounters. In a real deployment this must use an encounter type that distinguishes NEW consultations from follow-ups.",
+    "reviewed": true,
+    "source": "encounter",
+    "encounterTypes": ["d7151f82-c1f3-4152-a605-2f9ea7414a79"]
+  },
+
+  "40": {
+    "_note": "MDS 40 / summary item p - new admissions. Admission encounter type.",
+    "reviewed": true,
+    "source": "encounter",
+    "encounterTypes": ["e22e39fd-7db2-45e7-80f1-60fa0d5a4378"]
+  },
+
+  "4": {
+    "_note": "MDS 4 - major head / spine injury. Intracranial injury, spinal cord injury and vertebral fracture.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "136643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "120773AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "136951AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "126186AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "118050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "156402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "117969AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "10": {
+    "_note": "MDS 10 - acute watery diarrhea. Non-bloody diarrhea entries in the demo dictionary.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "149856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "163465AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "163713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "1467AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "11": {
+    "_note": "MDS 11 - acute bloody diarrhea (dysentery).",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "148036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "13": {
+    "_note": "MDS 13 - suspected measles.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "134561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "115886AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "14": {
+    "_note": "MDS 14 - suspected meningitis.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "115835AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "121255AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "123103AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "15": {
+    "_note": "MDS 15 - suspected tetanus.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": ["124957AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"]
+  },
+
+  "16": {
+    "_note": "MDS 16 - acute flaccid paralysis.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": ["160426AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"]
+  },
+
+  "18": {
+    "_note": "MDS 18 - fever of unknown origin.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": ["127990AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"]
+  },
+
+  "9": {
+    "_note": "MDS 9 - acute respiratory infection.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "154983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "149478AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "159222AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "28": {
+    "_note": "MDS 28 - severe acute malnutrition.",
+    "reviewed": true,
+    "source": "encounterDiagnosis",
+    "diagnoses": [
+      "163302AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "162331AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "162330AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    ]
+  },
+
+  "3": {
+    "_note": "MDS 3 - female, pregnant. Pregnancy status = Yes. The demo database currently holds no such observation, so this row counts 0 and must not be read as 'no pregnant patients'. Included to show the codedObservation shape alongside the others.",
+    "reviewed": true,
+    "source": "codedObservation",
+    "question": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "answers": ["1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"],
+    "countUnit": "encounter"
+  },
+
+  "42": {
+    "_note": "MDS 42 - death within facility. Demo proxy only: no discharge-disposition concept is populated in this database, so Discharge encounters are NOT a valid death mapping. Left unmapped on purpose - see README.",
+    "reviewed": false,
+    "source": "encounter",
+    "encounterTypes": ["181820aa-88c9-479b-9077-af92f5364329"]
+  }
+}

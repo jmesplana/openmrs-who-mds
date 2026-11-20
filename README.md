@@ -15,6 +15,13 @@ mappings remain missing rather than becoming zero.
 The local frontend registry reports Core 11.0.0. The backend compiles against OpenMRS Platform 2.7.0
 and has been smoke-tested on Platform 2.8.10 (Java 21, UTC).
 
+## Walkthrough
+
+[**docs/walkthrough.md**](docs/walkthrough.md) goes end to end on a local stack: open the app,
+record a patient visit and a coded diagnosis, then generate the report and see those entries counted
+against MDS indicator rows. It also covers the status column, the encounter-vs-visit location
+gotcha, the AM/PM interval trap and troubleshooting.
+
 ## Screenshots
 
 Report filters, before a location is selected:
@@ -24,6 +31,10 @@ Report filters, before a location is selected:
 A generated draft report, with team information and per-indicator counts:
 
 ![Generated report](docs/images/02-report.png)
+
+Mapped indicators counting real clinical entries, with unmapped rows still shown as missing:
+
+![Mapped indicator counts](docs/images/05-mapped-counts.png)
 
 The printable output, which reproduces the official WHO EMT-MDS Daily Reporting Form (Ver 2019).
 One page is produced per reporting interval:
@@ -73,7 +84,7 @@ To undo frontend registration, copy the backed-up JSON files from `.local-instal
 
 ## Permissions
 
-Reporting users need `Run WHO MDS Reports`, plus existing OpenMRS read privileges for locations, concepts, encounter types, encounters, observations and global properties. Existing service-layer permissions are enforced.
+Reporting users need `Run WHO MDS Reports`, plus existing OpenMRS read privileges for locations, concepts, encounter types, encounters, observations and global properties. Mappings using the `encounterDiagnosis` source additionally need `Get Diagnoses`. Existing service-layer permissions are enforced.
 
 Grant either `WHO MDS All Locations` or a privilege named exactly `WHO MDS Location: <location-uuid>` for each permitted location. Create location-specific privileges and assign them to the relevant roles in OpenMRS administration.
 
@@ -87,12 +98,61 @@ Supported sources:
 
 - `encounter`: count non-voided encounters of explicitly selected types, using encounter datetime and exact encounter location. Each encounter counts once. Do not map general encounters to new consultations unless that type distinguishes new consultations from follow-ups.
 - `codedObservation`: match a coded question and answer UUIDs using observation datetime and location. Linked encounters must also be non-voided and at the selected location. `countUnit: encounter` deduplicates each indicator per encounter within a report interval and excludes observations without encounters. `countUnit: observation` counts individual observations; use only if each represents a distinct clinical event.
+- `encounterDiagnosis`: count encounters carrying a coded diagnosis from `diagnoses` (a list of
+  concept UUIDs), read from the `encounter_diagnosis` table via `DiagnosisService`. This is the
+  source for the O3 diagnosis widget, which does not write coded observations. Encounters are
+  selected by encounter datetime and exact encounter location, then each one's non-voided diagnoses
+  are inspected. **Each encounter counts once per indicator** even when several of its diagnoses fall
+  in the same group, so grouping sibling concepts (for example several vertebral fractures under row
+  `4`) does not double-count a patient visit. Optional `certainty` (`CONFIRMED` or `PROVISIONAL`)
+  restricts by diagnosis certainty; optional `encounterTypes` restricts which encounter types are
+  considered. Non-coded (free-text) diagnoses are never counted.
+
+### Sample mapping (demo database)
+
+`config/mappings.sample-demo.json` is a **worked sample** that produces real counts on the OpenMRS 3
+reference-application demo database. It exists to demonstrate automated capture end to end; it is
+**not** a validated EMT MDS case-definition set, because the demo database holds randomly generated
+CIEL diagnoses rather than EMT activity. Every concept and encounter-type UUID in it was resolved
+against a live instance (Platform 2.8.10, Core 11.0.0) rather than guessed.
+
+It maps 14 rows across all three sources:
+
+| Row | Indicator | Source | Notes |
+| --- | --- | --- | --- |
+| `o` | New consultations | `encounter` | Visit Note. **Demo proxy only** — this type does not separate new from follow-up visits. |
+| `40` | New admissions | `encounter` | Admission encounter type. |
+| `4` | Major head / spine injury | `encounterDiagnosis` | Intracranial, spinal cord and vertebral fracture concepts grouped. |
+| `9`, `10`, `11` | ARI, watery diarrhea, bloody diarrhea | `encounterDiagnosis` | Sibling concepts grouped per row. |
+| `13`, `14`, `15`, `16`, `18` | Measles, meningitis, tetanus, AFP, fever of unknown origin | `encounterDiagnosis` | |
+| `28` | Severe acute malnutrition | `encounterDiagnosis` | |
+| `3` | Female, pregnant | `codedObservation` | Pregnancy status = Yes. Included to show the shape; see the zero-count caveat below. |
+| `42` | Death within facility | `encounter` | Deliberately left `reviewed: false`, so it reports `Mapping not reviewed`. Discharge encounters are **not** a valid death mapping. |
+
+To load it:
+
+```sh
+curl -u <user>:<password> -X POST -H 'Content-Type: application/json' \
+  -d "{\"value\": $(python3 -c 'import json;print(json.dumps(open("config/mappings.sample-demo.json").read()))')}" \
+  http://localhost/openmrs/ws/rest/v1/systemsetting/whomds.mappings
+```
+
+Verified on the demo database for **Site 42, 2026-01-01 to 2026-03-30, weekly**: 13 rows report as
+`Mapped — review required`, 1 as `Mapping not reviewed`, 38 remain `Not configured` and 18 stay
+manual. Module output matched independent SQL against `encounter` and `encounter_diagnosis` exactly:
+new consultations 16, suspected measles 2, major head/spine injury 1, with age banding populated.
+
+Two caveats this sample makes visible on purpose:
+
+- Row `3` counts **0** because the demo database contains no `Pregnancy status` observation at all. A
+  mapped zero means "nothing matched", never "no pregnant patients presented".
+- Rows left out of the file stay `Not configured` rather than silently counting zero.
 
 Keys are MDS IDs `1`–`50`, `o` (new consultations), and `q` (live births). Row `40` supplies new admissions, also called summary item `p` on the form. Demographic rows `1`–`3` also require explicit mappings; missing pregnancy observations are never assumed to mean non-pregnant. Additional condition rows `19`–`22` require deployment-specific definitions.
 
 Bed capacity/vacancy (`r`–`t`) and needs/risks (`51`–`65`) are manual review fields. Record bed snapshots at interval end. Manual entries and team details are included in exports but **not saved to OpenMRS**.
 
-The mapper does not yet support numeric observation sums, multi-field case definitions, FHIR conditions, diagnosis objects or historical bed-management state. These need explicit extensions after inspecting existing forms. Missing observations cannot establish that no clinical event occurred. Age uses the recorded birthdate at the event date in the reporting timezone; missing/future dates appear in Unknown age. Estimated birthdates are used as recorded.
+The mapper does not yet support numeric observation sums, multi-field case definitions, FHIR conditions, the `condition_list` table or historical bed-management state. These need explicit extensions after inspecting existing forms. Missing observations cannot establish that no clinical event occurred. Age uses the recorded birthdate at the event date in the reporting timezone; missing/future dates appear in Unknown age. Estimated birthdates are used as recorded.
 
 ## Time and counting
 

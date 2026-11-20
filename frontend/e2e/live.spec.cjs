@@ -33,5 +33,9 @@ test('installed backend works in the real O3 shell with local frontend assets', 
   await page.getByLabel('Reporting timezone').fill('Asia/Manila');
   await page.getByRole('button', { name: 'Generate report' }).click();
   await expect(page.getByText('DRAFT · REVIEW REQUIRED')).toBeVisible();
-  await expect(page.getByRole('row').filter({ hasText: 'Acute respiratory infection' })).toContainText('Not configured');
+  // Either state is valid: 'Not configured' with no mappings loaded, or a mapped count once
+  // config/mappings.sample-demo.json is in the whomds.mappings global property. What must never
+  // happen is a blank or a bare zero with no status.
+  await expect(page.getByRole('row').filter({ hasText: 'Acute respiratory infection' }).first())
+    .toContainText(/Not configured|Mapped — review required|Mapping not reviewed/);
 });

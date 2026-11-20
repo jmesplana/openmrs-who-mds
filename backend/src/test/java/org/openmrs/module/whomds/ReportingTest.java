@@ -46,6 +46,19 @@ class ReportingTest {
         Map<String, Long> count = Aggregator.count(events, "9", start, end, ZoneId.of("UTC"), false);
         assertEquals(1L, count.get("Total")); assertEquals(1L, count.get("<5"));
     }
+    @Test void diagnosisGroupCountsEachEncounterOnce() {
+        // An encounterDiagnosis mapping keys events by encounter, so several matching diagnoses
+        // on one encounter (e.g. two vertebral fractures under MDS 4) must count once.
+        Instant start = Instant.parse("2026-01-01T00:00:00Z"), end = start.plusSeconds(86400);
+        List<Aggregator.Event> events = Arrays.asList(
+            new Aggregator.Event("4", "enc-1", start, LocalDate.of(1990, 5, 2)),
+            new Aggregator.Event("4", "enc-1", start.plusSeconds(120), LocalDate.of(1990, 5, 2)),
+            new Aggregator.Event("4", "enc-2", start.plusSeconds(240), LocalDate.of(2024, 1, 1)));
+        Map<String, Long> count = Aggregator.count(events, "4", start, end, ZoneId.of("UTC"), false);
+        assertEquals(2L, count.get("Total"));
+        assertEquals(1L, count.get("5+"));
+        assertEquals(1L, count.get("<5"));
+    }
     @Test void handlesUnknownAgeAndBirthdayInReportingTimezone() {
         Instant start = Instant.parse("2026-01-01T23:00:00Z"), end = start.plusSeconds(3600);
         List<Aggregator.Event> events = Arrays.asList(

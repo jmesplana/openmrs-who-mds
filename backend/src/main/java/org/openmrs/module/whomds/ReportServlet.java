@@ -84,7 +84,7 @@ public class ReportServlet extends HttpServlet {
                     "start", period.start.toString(), "end", period.end.toString(), "reports", reports,
                     "warnings", Arrays.asList("Draft: verify mappings, missing data and team details before use.",
                         "End times are exclusive. Only the exact selected location is included; child locations are excluded.",
-                        "Counts reflect configured encounter/observation events, not automatically unique patients.",
+                        "Counts reflect configured encounter, diagnosis and observation events, not automatically unique patients.",
                         "Missing observations cannot be distinguished from unrecorded clinical activity. A mapped zero does not establish completeness.",
                         "Weekly output is a period summary, not the official daily submission. Bed snapshots and narrative sections require manual completion.")));
         } catch (IllegalArgumentException | DateTimeException e) {
@@ -115,13 +115,49 @@ public class ReportServlet extends HttpServlet {
                 if (answer == null || answer.getRetired()) return "Unknown or retired answer concept";
             }
             if (!Arrays.asList("encounter", "observation").contains(m.path("countUnit").asText())) return "Invalid count unit";
+        } else if ("encounterDiagnosis".equals(source)) {
+            if (!m.path("diagnoses").isArray() || m.get("diagnoses").size() == 0) return "No diagnosis concepts configured";
+            for (JsonNode uuid : m.get("diagnoses")) {
+                Concept diagnosis = Context.getConceptService().getConceptByUuid(uuid.asText());
+                if (diagnosis == null || diagnosis.getRetired()) return "Unknown or retired diagnosis concept";
+            }
+            if (m.has("certainty") && !Arrays.asList("CONFIRMED", "PROVISIONAL").contains(m.path("certainty").asText()))
+                return "Invalid diagnosis certainty";
+            if (m.has("encounterTypes") && (!m.get("encounterTypes").isArray() || m.get("encounterTypes").size() == 0))
+                return "Invalid encounter type filter";
+            if (m.has("encounterTypes")) for (JsonNode uuid : m.get("encounterTypes")) {
+                EncounterType type = Context.getEncounterService().getEncounterTypeByUuid(uuid.asText());
+                if (type == null || type.getRetired()) return "Unknown or retired encounter type";
+            }
         } else return "Unsupported mapping source";
         return null;
     }
 
     private void collect(List<Aggregator.Event> out, String id, JsonNode m, Location location, ReportingPeriod period) {
         Date start = Date.from(period.start), end = Date.from(period.end);
-        if ("encounter".equals(m.get("source").asText())) {
+        String source = m.get("source").asText();
+        if ("encounterDiagnosis".equals(source)) {
+            Set<String> wanted = new HashSet<>();
+            for (JsonNode uuid : m.get("diagnoses")) wanted.add(uuid.asText());
+            List<EncounterType> types = null;
+            if (m.has("encounterTypes")) {
+                types = new ArrayList<>();
+                for (JsonNode uuid : m.get("encounterTypes")) types.add(Context.getEncounterService().getEncounterTypeByUuid(uuid.asText()));
+            }
+            String certainty = m.has("certainty") ? m.get("certainty").asText() : null;
+            List<Encounter> encounters = Context.getEncounterService().getEncounters(null, location, start, end, null, types, null, null, null, false);
+            for (Encounter e : encounters) {
+                if (Boolean.TRUE.equals(e.getVoided()) || e.getPatient().getVoided() || e.getLocation() == null || !location.equals(e.getLocation())) continue;
+                // Each encounter contributes at most once per indicator, even with several matching diagnoses.
+                for (Diagnosis d : Context.getDiagnosisService().getDiagnosesByEncounter(e, false, false)) {
+                    if (d.getDiagnosis() == null || d.getDiagnosis().getCoded() == null
+                            || !wanted.contains(d.getDiagnosis().getCoded().getUuid())) continue;
+                    if (certainty != null && (d.getCertainty() == null || !certainty.equals(d.getCertainty().name()))) continue;
+                    out.add(new Aggregator.Event(id, e.getUuid(), e.getEncounterDatetime().toInstant(), birthDate(e.getPatient())));
+                    break;
+                }
+            }
+        } else if ("encounter".equals(source)) {
             List<EncounterType> types = new ArrayList<>();
             for (JsonNode uuid : m.get("encounterTypes")) types.add(Context.getEncounterService().getEncounterTypeByUuid(uuid.asText()));
             List<Encounter> encounters = Context.getEncounterService().getEncounters(null, location, start, end, null, types, null, null, null, false);
